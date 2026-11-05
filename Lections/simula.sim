@@ -1,0 +1,47 @@
+Begin
+    ! Определение базового класса "Точка" (Point);
+    Class Point(X, Y);
+    Real X, Y;
+    Begin
+        ! Метод класса для вывода координат;
+        Procedure Print;
+        Begin
+            OutText("Точка с координатами: (");
+            OutFix(X, 2, 0);
+            OutText(", ");
+            OutFix(Y, 2, 0);
+            OutText(")");
+            OutImage;
+        End;
+    End;
+
+    ! Наследование: создаем класс "Цветная Точка" (ColorPoint),;
+    ! который расширяет (prefix) базовый класс Point;
+    Point Class ColorPoint(Color);
+    Text Color;
+    Begin
+        ! Переопределение или дополнение метода;
+        Procedure PrintColor;
+        Begin
+            Print; ! Вызываем метод базового класса;
+            OutText("Цвет точки: ");
+            OutText(Color);
+            OutImage;
+        End;
+    End;
+
+    ! Объявление ссылок на будущие объекты (аналог указателей/переменных);
+    Ref(Point) myPoint;
+    Ref(ColorPoint) myColorPoint;
+
+    ! Выделение памяти и создание объектов (оператор 'new');
+    ! Для работы со ссылками используется специальный оператор ':-';
+    myPoint :- New Point(10.5, 20.0);
+    myColorPoint :- New ColorPoint(5.0, 5.0, "Красный");
+
+    ! Вызов методов;
+    myPoint.Print;
+    OutImage;
+    myColorPoint.PrintColor;
+
+End;
